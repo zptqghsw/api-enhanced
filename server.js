@@ -299,7 +299,7 @@ async function constructServer(moduleDefs) {
           return request(...obj)
         })
         logger.info(`Request Success: ${decode(req.originalUrl)}`)
-        logger.info(`Request baseUrl: ${req.baseUrl}`)
+        logger.info(`Request baseUrl: ${decode(req.baseUrl)}`)
 
         // 夹带私货部分：如果开启了通用解锁，并且是获取歌曲URL的接口，则尝试解锁（如果需要的话）ヾ(≧▽≦*)o
         if (
