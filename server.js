@@ -307,6 +307,7 @@ async function constructServer(moduleDefs) {
         ) {
           const song = moduleResponse.body.data[0]
           if (
+            process.env.SELECT_MAX_BR === 'true' ||
             song.freeTrialInfo !== null ||
             !song.url ||
             [1, 4].includes(song.fee)
