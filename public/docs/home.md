@@ -2330,6 +2330,8 @@ privilege:权限相关信息
 
 说明 : 调用此接口 , 可获得每日推荐歌曲 ( 需要登录 )
 
+**可选参数 :** `afresh`: 是否刷新日推 , 默认为 false
+
 **接口地址 :** `/recommend/songs`
 
 **调用例子 :** `/recommend/songs`

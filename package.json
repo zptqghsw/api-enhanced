@@ -66,9 +66,9 @@
   ],
   "dependencies": {
     "@neteasecloudmusicapienhanced/unblockmusic-utils": "^0.2.4",
-    "axios": "^1.13.6",
+    "axios": "^1.15.0",
     "crypto-js": "^4.2.0",
-    "dotenv": "^17.3.1",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-fileupload": "^1.5.2",
     "gzip": "^0.1.0",
@@ -88,13 +88,13 @@
     "@types/express-fileupload": "^1.5.1",
     "@types/mocha": "^10.0.10",
     "@types/node": "25.5.0",
-    "@typescript-eslint/eslint-plugin": "^8.57.2",
-    "@typescript-eslint/parser": "^8.57.2",
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
+    "@typescript-eslint/parser": "^8.58.2",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-html": "^8.1.4",
     "eslint-plugin-prettier": "^5.5.5",
-    "globals": "^17.4.0",
+    "globals": "^17.5.0",
     "husky": "^9.1.7",
     "intelli-espower-loader": "^1.1.0",
     "lint-staged": "^16.4.0",
@@ -102,7 +102,7 @@
     "nodemon": "^3.1.14",
     "pkg": "^5.8.1",
     "power-assert": "^1.6.1",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.3",
     "typescript": "^5.9.3"
   }
 }
