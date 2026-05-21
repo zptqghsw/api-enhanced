@@ -5128,43 +5128,6 @@ let data = encodeURIComponent(
 
 **调用例子 :** `/voicelist/my/created`
 
-### 发布评论
-
-说明 : 登录后调用此接口, 传入评论线程 id, 评论内容等信息, 发布评论
-
-**必选参数 :**
-
-`id`: 歌曲id
-`content`: 评论内容
-
-**接口地址 :** `/comment/add`
-
-**调用例子 :** `/comment/add?id=2058263032&content=这首歌太棒了！`
-
-### 删除评论
-
-说明 : 登录后调用此接口, 传入评论 id, 删除评论
-
-**必选参数 :**
-`cid`: 评论 id
-`id`: 歌曲id
-
-**接口地址 :** `/comment/delete`
-
-**调用例子 :** `/comment/delete?threadId=2058263032&commentId=123456789`
-
-### 回复评论
-
-说明 : 登录后调用此接口, 传入歌曲 id, 回复内容等信息, 回复评论
-
-**必选参数 :**
-`id`: 歌曲id
-`commentId`: 被回复的评论 id
-`content`: 回复内容
-
-**接口地址 :** `/comment/reply`
-
-**调用例子 :** `/comment/reply?id=2058263032&commentId=123456789&content=我也觉得这首歌很棒！`
 
 ### DIFM电台 - 分类
 
@@ -5329,6 +5292,22 @@ let data = encodeURIComponent(
 **接口地址 :** `/song/copyright/rcmd`
 
 **调用例子 :** `/song/copyright/rcmd?songid=27946878`
+
+### 举报评论
+
+说明 : 登录后调用此接口, 传入歌曲 id 和评论 id, 举报评论
+
+**必选参数 :**
+
+`id`: 歌曲 id
+
+`cid`: 评论 id
+
+`reason`: 举报理由
+
+**接口地址 :** `/comment/report`
+
+**调用例子 :* `/comment/report?id=2058263032&cid=123456789&reason=人身攻击`
 
 ## 离线访问此文档
 
