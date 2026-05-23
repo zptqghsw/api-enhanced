@@ -1,38 +1,25 @@
-# .github/workflows/release.yml
 name: Release
 
 on:
   release:
     types: [published]
-  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
-  release:
+  publish:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-      packages: write
+
     steps:
       - uses: actions/checkout@v6
 
-      # 发布到 NPM Registry
-      - name: Setup Node.js for NPM
-        uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-      - run: npm install
-      - name: Publish to NPM
-        run: npm publish --access public
+          node-version: 24
+          cache: npm
 
-      # 发布到 GitHub Packages
-      - name: Setup Node.js for GitHub Packages
-        uses: actions/setup-node@v6
-        with:
-          node-version: 20
-          registry-url: 'https://npm.pkg.github.com'
-      - name: Publish to GitHub Packages
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
+      - run: npm ci
+
+      - run: npm publish --access public

@@ -5309,6 +5309,36 @@ let data = encodeURIComponent(
 
 **调用例子 :* `/comment/report?id=2058263032&cid=123456789&reason=人身攻击`
 
+### 多级行政区划数据
+
+说明 : 调用此接口,可获取多级行政区划数据
+
+**可选参数 :** `bizCode`: 业务类型,默认空字符串。传入 `chart` 时获取支持城市榜的城市列表,传空时获取所有城市列表
+
+**接口地址 :** `/lbs/city/code`
+
+**调用例子 :** `/lbs/city/code`
+
+### 指定维度音乐排行榜详情
+
+说明 : 调用此接口,可获取城市榜、城市风格榜等指定维度音乐排行榜详情
+
+**必选参数 :**
+
+`chartCode`: 榜单编码,如 `CITY_SONG_CHART`、`CITY_STYLE_SONG_CHART`
+
+`targetId`: 目标 id,城市榜如 `110000`,城市风格榜如 北京华语流行榜 `110000_1020`。城市风格榜格式通常为 `城市 id_曲风 id`,其中曲风 id 可通过[曲风列表](#曲风列表)接口 `/style/list` 获取。城市榜的城市列表可通过[多级行政区划数据](#多级行政区划数据)接口传入 `bizCode=chart` 获取；城市风格榜的城市列表可通过该接口传空 `bizCode` 获取
+
+`targetType`: 目标类型,如 `CITY`、`CITY_STYLE`
+
+**接口地址 :** `/chart/detail`
+
+**调用例子 :** `/chart/detail?chartCode=CITY_SONG_CHART&targetId=110000&targetType=CITY`
+
+### 指定维度音乐排行榜列表
+
+说明 : 调用此接口,可获取城市榜、城市风格榜等指定维度音乐排行榜歌曲列表
+
 ## 离线访问此文档
 
 此文档同时也是 Progressive Web Apps(PWA), 加入了 serviceWorker, 可离线访问
