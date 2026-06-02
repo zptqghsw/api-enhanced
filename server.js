@@ -336,6 +336,7 @@ async function constructServer(moduleDefs) {
         ) {
           const song = moduleResponse.body.data[0]
           if (
+            process.env.ENABLE_GENERAL_UNBLOCK === 'true' ||
             song.freeTrialInfo !== null ||
             !song.url ||
             [1, 4].includes(song.fee)
