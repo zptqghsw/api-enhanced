@@ -331,15 +331,11 @@ async function constructServer(moduleDefs) {
 
         // 夹带私货部分：如果开启了通用解锁，并且是获取歌曲URL的接口，则尝试解锁（如果需要的话）ヾ(≧▽≦*)o
         if (
-          req.baseUrl === '/song/url/v1' &&
-          process.env.ENABLE_GENERAL_UNBLOCK === 'true'
+          req.baseUrl === '/song/url/v1'
         ) {
           const song = moduleResponse.body.data[0]
           if (
-            process.env.ENABLE_GENERAL_UNBLOCK === 'true' ||
-            song.freeTrialInfo !== null ||
-            !song.url ||
-            [1, 4].includes(song.fee)
+            process.env.ENABLE_GENERAL_UNBLOCK === 'true'
           ) {
             const {
               matchID,
