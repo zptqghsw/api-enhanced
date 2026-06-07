@@ -2053,9 +2053,7 @@ export function listen_data_today_song(
   params: RequestBaseConfig,
 ): Promise<Response>
 
-export function listen_data_total(
-  params: RequestBaseConfig,
-): Promise<Response>
+export function listen_data_total(params: RequestBaseConfig): Promise<Response>
 
 export function listen_data_year_report(
   params: RequestBaseConfig,
@@ -2192,9 +2190,7 @@ export function radio_sport_get(
   } & RequestBaseConfig,
 ): Promise<Response>
 
-export function recent_listen_list(
-  params: RequestBaseConfig,
-): Promise<Response>
+export function recent_listen_list(params: RequestBaseConfig): Promise<Response>
 
 export function recommend_songs_dislike(
   params: {
@@ -2202,9 +2198,7 @@ export function recommend_songs_dislike(
   } & RequestBaseConfig,
 ): Promise<Response>
 
-export function register_anonimous(
-  params: RequestBaseConfig,
-): Promise<Response>
+export function register_anonimous(params: RequestBaseConfig): Promise<Response>
 
 export function sati_resource_list(
   params: {
@@ -2229,9 +2223,7 @@ export function sati_resource_sub_list(
   params: RequestBaseConfig,
 ): Promise<Response>
 
-export function sati_tag_list(
-  params: RequestBaseConfig,
-): Promise<Response>
+export function sati_tag_list(params: RequestBaseConfig): Promise<Response>
 
 export function sati_timescene_resources_get(
   params: RequestBaseConfig,
@@ -2363,9 +2355,7 @@ export function song_url_match(
   } & RequestBaseConfig,
 ): Promise<Response>
 
-export function song_url_ncmget(
-  params: RequestBaseConfig,
-): Promise<Response>
+export function song_url_ncmget(params: RequestBaseConfig): Promise<Response>
 
 export function song_url_v1_302(
   params: {
@@ -2388,9 +2378,7 @@ export function threshold_detail_get(
   params: RequestBaseConfig,
 ): Promise<Response>
 
-export function toplist_detail_v2(
-  params: RequestBaseConfig,
-): Promise<Response>
+export function toplist_detail_v2(params: RequestBaseConfig): Promise<Response>
 
 export function ugc_album_get(
   params: {
@@ -2433,9 +2421,7 @@ export function ugc_song_get(
   } & RequestBaseConfig,
 ): Promise<Response>
 
-export function ugc_user_devote(
-  params: RequestBaseConfig,
-): Promise<Response>
+export function ugc_user_devote(params: RequestBaseConfig): Promise<Response>
 
 export function user_detail_new(
   params: {
@@ -2516,13 +2502,9 @@ export function verify_qrcodestatus(
   } & RequestBaseConfig,
 ): Promise<Response>
 
-export function vip_sign(
-  params: RequestBaseConfig,
-): Promise<Response>
+export function vip_sign(params: RequestBaseConfig): Promise<Response>
 
-export function vip_sign_info(
-  params: RequestBaseConfig,
-): Promise<Response>
+export function vip_sign_info(params: RequestBaseConfig): Promise<Response>
 
 export function vip_tasks_v1(
   params: {

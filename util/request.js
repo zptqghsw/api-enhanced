@@ -110,7 +110,7 @@ const userAgentMap = {
 // 预先定义常量
 const DOMAIN = APP_CONF.domain
 const API_DOMAIN = APP_CONF.apiDomain
-const XEAPI_DOMAIN = 'https://interface3.music.163.com'
+const XEAPI_DOMAIN = APP_CONF.xeapiDomain
 const ENCRYPT_RESPONSE = APP_CONF.encryptResponse
 const SPECIAL_STATUS_CODES = new Set([201, 302, 400, 502, 800, 801, 802, 803])
 

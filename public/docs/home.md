@@ -2492,6 +2492,18 @@ privilege:权限相关信息
 
 **调用例子 :** `/scrobble?id=518066366&sourceid=36780169&time=291`
 
+### 提交歌曲播放状态
+
+说明 : 调用此接口可提交歌曲播放状态，支持会话追踪和播放模式记录，未传入 `sessionId` 时后端会自动生成
+
+**必选参数 :** `id`: 歌曲 id
+
+**可选参数 :** `sessionId`: 播放会话 ID（12 位大写字母和数字），不传则自动生成, `progress`: 播放进度（秒），默认 0, `playMode`: 播放模式，默认 `list_loop`, `type`: 资源类型，默认 `song`
+
+**接口地址 :** `/relay/play/state/submit`
+
+**调用例子 :** `/relay/play/state/submit?id=518066366&progress=30`
+
 ### 热门歌手
 
 说明 : 调用此接口 , 可获取热门歌手数据
@@ -5377,6 +5389,16 @@ let data = encodeURIComponent(
 **接口地址 :** `/vip/sign/history`
 
 **调用例子 :** `/vip/sign/history`
+
+### 直接获取云盘歌曲下载链接
+
+说明 : 调用此接口, 传入云盘歌曲 id, 可直接获取云盘歌曲下载链接
+
+**必选参数 :** `id`: 云盘歌曲 id
+
+**接口地址 :** `/song/cloud/download`
+
+**调用例子 :** `/song/cloud/download?id=123456789`
 
 ## 离线访问此文档
 
