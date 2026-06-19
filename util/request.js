@@ -88,6 +88,12 @@ const osMap = {
     osver: '16.2',
     channel: 'distribution',
   },
+  osx: {
+    os: 'osx',
+    appver: '3.1.10.5100',
+    osver: '15.5',
+    channel: 'netease',
+  },
 }
 
 // 预先定义userAgentMap
@@ -306,7 +312,11 @@ const createRequest = (uri, data, options) => {
         if (cookie.MUSIC_A) header['MUSIC_A'] = cookie.MUSIC_A
 
         headers['Cookie'] = createHeaderCookie(header)
-        headers['User-Agent'] = options.ua || chooseUserAgent('api', 'iphone')
+        headers['User-Agent'] =
+          options.ua ||
+          (cookie.os === 'osx'
+            ? 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+            : chooseUserAgent('api', 'iphone'))
 
         if (crypto === 'eapi') {
           // headers['x-aeapi'] = true // 服务器会使用gzip压缩返回值

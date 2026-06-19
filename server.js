@@ -422,7 +422,7 @@ async function serveNcmApi(options) {
     options.checkVersion &&
     checkVersion().then(({ npmVersion, ourVersion, status }) => {
       if (status == VERSION_CHECK_RESULT.NOT_LATEST) {
-        logger.info(
+        logger.warn(
           `最新版本: ${npmVersion}, 当前版本: ${ourVersion}, 请及时更新`,
         )
       }
@@ -444,8 +444,9 @@ async function serveNcmApi(options) {
   ╠═╣╠═╝║    ║╣ ║║║╠═╣╠═╣║║║║  ║╣  ║║
   ╩ ╩╩  ╩    ╚═╝╝╚╝╩ ╩╩ ╩╝╚╝╚═╝╚═╝═╩╝
     `)
-    logger.info(`
-- Server started successfully @ http://${host ? host : 'localhost'}:${port}`)
+    logger.info(
+      `Server started successfully @ http://${host ? host : 'localhost'}:${port}`,
+    )
   })
 
   return appExt
