@@ -225,6 +225,8 @@ pnpm test
 
 [chaunsin/netease-cloud-music](https://github.com/chaunsin/netease-cloud-music)
 
+[folltoshe/netease-report-listen-song](https://github.com/folltoshe/netease-report-listen-song)
+
 ### SDK 生态
 
 | 语言     | 作者                                          | 地址                                                                                       | 类型  |

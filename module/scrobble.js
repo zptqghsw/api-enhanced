@@ -1,6 +1,8 @@
 // 听歌打卡
 
 const createOption = require('../util/option.js')
+const { APP_CONF } = require('../util/config.json')
+const DOMAIN = APP_CONF.clDomian
 module.exports = async (query, request) => {
   // 注入 os=osx 的 cookie
   let cookie = query.cookie || ''
@@ -56,7 +58,7 @@ module.exports = async (query, request) => {
   }
 
   const option = createOption(query, 'eapi')
-  option.domain = 'https://clientlog.music.163.com'
+  option.domain = DOMAIN
 
   // 发送两次请求
   const res1 = await request(`/api/feedback/weblog`, startplayData, option)
