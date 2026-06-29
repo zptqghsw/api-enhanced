@@ -1594,6 +1594,10 @@ export function vip_growthpoint_get(
   } & RequestBaseConfig,
 ): Promise<Response>
 
+export function vip_growthpoint_getall(
+  params: RequestBaseConfig,
+): Promise<Response>
+
 export function artist_fans(
   params: { id: number | string } & MultiPageConfig & RequestBaseConfig,
 ): Promise<Response>
@@ -2043,6 +2047,13 @@ export function listen_data_realtime_report(
 ): Promise<Response>
 
 export function listen_data_report(
+  params: {
+    type?: string
+    endTime?: string | number
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function listen_data_song_play_rank(
   params: {
     type?: string
     endTime?: string | number

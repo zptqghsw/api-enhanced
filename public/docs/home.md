@@ -3742,6 +3742,14 @@ type='1009' 获取其 id, 如`/search?keywords= 代码时间 &type=1009`
 
 **调用例子 :** `/vip/growthpoint/get?ids=7043206830_7` `/vip/growthpoint/get?ids=8613118351_1,8607552957_1`
 
+### 一键领取所有 vip 成长值
+
+说明 : 登录后调用此接口 , 一键领取所有已完成的会员任务成长值奖励
+
+**接口地址 :** `/vip/growthpoint/getall`
+
+**调用例子 :** `/vip/growthpoint/getall`
+
 ### 歌手粉丝
 
 说明 : 调用此接口 , 传入歌手 id, 可获取歌手粉丝
@@ -4809,6 +4817,23 @@ bitrate = Math.floor(br / 1000)
 说明 : 登录后调用此接口, 获取今日收听
 
 **接口地址 :** `/listen/data/today/song`
+
+### 听歌足迹 - 歌曲播放排行
+
+说明 : 登录后调用此接口, 获取歌曲播放排行, 返回每首歌的播放次数 (playCount); 默认返回前 20 名 (Top20), 不足则返回全部
+
+**必选参数 :**
+
+`type`: 维度类型 周 week 月 month
+
+**可选参数 :**
+
+`endTime` : 周: 每周周六 0 点的时间戳 月: 每月最后一天 0 点的时间戳
+不填就是本周/月的
+
+**接口地址 :** `/listen/data/song/play/rank`
+
+**调用例子 :** `/listen/data/song/play/rank?type=month`
 
 ### 听歌足迹 - 总收听时长
 
