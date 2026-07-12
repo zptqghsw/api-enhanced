@@ -45,14 +45,14 @@
 
 ### 环境要求
 
-- Node.js 18 及以上
+- Node.js 22 及以上
 - 推荐使用 pnpm 进行依赖管理
 
 ### 安装
 
 ```bash
 git clone https://github.com/neteasecloudmusicapienhanced/api-enhanced.git
-cd api
+cd api-enhanced
 pnpm i
 ```
 

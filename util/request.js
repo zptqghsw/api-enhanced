@@ -344,6 +344,11 @@ const createRequest = (uri, data, options) => {
       httpsAgent: createHttpsAgent(),
     }
 
+    // 自定义超时
+    if (options.timeout > 0) {
+      settings.timeout = options.timeout
+    }
+
     // 使用返回值加密
     const use_e_r = (crypto === 'eapi' || crypto === 'weapi') && data.e_r
     const use_xeapi = crypto === 'xeapi'

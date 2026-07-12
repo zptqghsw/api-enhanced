@@ -12,6 +12,8 @@ const createOption = (query, crypto = '') => {
     e_r: query.e_r || undefined,
     domain: query.domain || '',
     checkToken: query.checkToken || false,
+    headers: query.headers || {},
+    timeout: query.timeout || 0,
   }
 }
 module.exports = createOption

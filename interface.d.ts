@@ -1474,6 +1474,20 @@ export function artist_new_song(
   } & RequestBaseConfig,
 ): Promise<Response>
 
+export function artist_new_song_playall(
+  params: RequestBaseConfig,
+): Promise<Response>
+
+export function artist_new_song_mv_list_v2(
+  params: {
+    startTimestamp?: number | string
+    before?: number | string
+    sourceType?: number | string
+    limit?: number | string
+    firstRequest?: boolean | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
 export function artist_detail(
   params: {
     id: number | string
