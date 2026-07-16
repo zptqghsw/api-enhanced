@@ -18,6 +18,7 @@ const {
 } = require('./index')
 const { URLSearchParams, URL } = require('url')
 const { APP_CONF } = require('../util/config.json')
+const { getToken: antiCheatToken } = require('../module/register_checktoken')
 
 // 预先读取匿名token并缓存
 const anonymous_token = fs.readFileSync(
@@ -181,6 +182,8 @@ const generateRequestId = () => {
 }
 
 const createRequest = (uri, data, options) => {
+  const token = options.checkToken ? antiCheatToken() : ''
+
   return new Promise((resolve, reject) => {
     // 变量声明和初始化
     const headers = options.headers ? { ...options.headers } : {}
@@ -264,6 +267,9 @@ const createRequest = (uri, data, options) => {
         headers['x-sdeviceid'] = cookie.sDeviceId || cookie.deviceId
         headers['x-buildver'] = xeapiBuildver
         if (cookie.MUSIC_U) headers['x-music-u'] = cookie.MUSIC_U
+        if (options.checkToken) {
+          headers['X-antiCheatToken'] = token
+        }
         const xeapiCookie = {
           ...cookie,
           os: xeapiOs,
@@ -302,14 +308,14 @@ const createRequest = (uri, data, options) => {
           __csrf: csrfToken,
           channel: cookie.channel,
           requestId: generateRequestId(),
-          ...(options.checkToken
-            ? { 'X-antiCheatToken': APP_CONF.checkToken }
-            : {}),
           // clientSign: APP_CONF.clientSign,
         }
 
         if (cookie.MUSIC_U) header['MUSIC_U'] = cookie.MUSIC_U
         if (cookie.MUSIC_A) header['MUSIC_A'] = cookie.MUSIC_A
+        if (options.checkToken) {
+          header['X-antiCheatToken'] = token
+        }
 
         headers['Cookie'] = createHeaderCookie(header)
         headers['User-Agent'] =

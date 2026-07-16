@@ -1,6 +1,6 @@
 {
   "name": "@neteasecloudmusicapienhanced/api",
-  "version": "4.36.2",
+  "version": "4.37.0",
   "description": "全网最全的网易云音乐API接口 || A revival project for NeteaseCloudMusicApi Node.js Services (Half Refactor & Enhanced) || 网易云音乐 API 备份 + 增强 || 本项目自原版v4.28.0版本后开始自行维护",
   "scripts": {
     "dev": "nodemon app.js",
@@ -82,7 +82,7 @@
     "express": "^5.2.1",
     "express-fileupload": "^1.5.2",
     "gzip": "^0.1.0",
-    "music-metadata": "^11.13.0",
+    "music-metadata": "^11.14.0",
     "node-forge": "^1.4.0",
     "pac-proxy-agent": "^7.2.0",
     "qrcode": "^1.5.4",
@@ -92,15 +92,15 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.5",
-    "@eslint/js": "^9.39.4",
+    "@eslint/eslintrc": "^3.3.6",
+    "@eslint/js": "^9.39.5",
     "@types/express": "^5.0.6",
     "@types/express-fileupload": "^1.5.1",
     "@types/mocha": "^10.0.10",
     "@types/node": "25.9.2",
-    "@typescript-eslint/eslint-plugin": "^8.62.1",
-    "@typescript-eslint/parser": "^8.62.1",
-    "eslint": "^9.39.4",
+    "@typescript-eslint/eslint-plugin": "^8.64.0",
+    "@typescript-eslint/parser": "^8.64.0",
+    "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-html": "^8.1.4",
     "eslint-plugin-prettier": "^5.5.6",
@@ -112,7 +112,7 @@
     "nodemon": "^3.1.14",
     "pkg": "^5.8.1",
     "power-assert": "^1.6.1",
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.5",
     "typescript": "^5.9.3"
   },
   "publishConfig": {
