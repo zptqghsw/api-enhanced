@@ -72,11 +72,11 @@ module.exports = async (query, request) => {
     reqParam: JSON.stringify(rightsParam),
   }
 
-  const option = createOption(query, 'xeapi')
-  // 关键: 开启 X-antiCheatToken 头
-  option.checkToken = true
-
-  const res = await request(`/api/ad/listening/rights/gain`, data, option)
+  const res = await request(
+    `/api/ad/listening/rights/gain`,
+    data,
+    createOption(query, 'xeapi', true),
+  )
 
   return {
     status: 200,
