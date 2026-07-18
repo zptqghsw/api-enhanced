@@ -7,8 +7,7 @@ module.exports = async (query, request) => {
     type_ids: query.type_ids || '["400002_0"]',
   }
 
-  const option = createOption(query, 'xeapi')
-  option.checkToken = true
+  const option = createOption(query, 'xeapi', 'v3')
 
   const res = await request(`/api/ad/get`, data, option)
   const raw = res.body

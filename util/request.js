@@ -18,7 +18,12 @@ const {
 } = require('./index')
 const { URLSearchParams, URL } = require('url')
 const { APP_CONF } = require('../util/config.json')
-const { getToken: antiCheatToken } = require('../module/register_checktoken')
+const {
+  getToken: antiCheatTokenV2,
+} = require('../module/register_checktoken_v2')
+const {
+  getToken: antiCheatTokenV3,
+} = require('../module/register_checktoken_v3')
 
 // 预先读取匿名token并缓存
 const anonymous_token = fs.readFileSync(
@@ -182,7 +187,15 @@ const generateRequestId = () => {
 }
 
 const createRequest = (uri, data, options) => {
-  const token = options.checkToken ? antiCheatToken() : ''
+  let token = ''
+  switch (options.checkToken) {
+    case 'v2':
+      token = antiCheatTokenV2()
+      break
+    case 'v3':
+      token = antiCheatTokenV3()
+      break
+  }
 
   return new Promise((resolve, reject) => {
     // 变量声明和初始化

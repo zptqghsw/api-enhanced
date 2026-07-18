@@ -8,7 +8,7 @@
 const { default: axios } = require('axios')
 const { APP_CONF } = require('../util/config.json')
 
-const URL = APP_CONF.dunDomain + '/v3/b?pn=YD00000558929251'
+const URL = APP_CONF.dunDomainV3 + '/v3/b?pn=YD00000558929251'
 let _token = ''
 
 async function fetch() {

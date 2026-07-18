@@ -5493,6 +5493,92 @@ let data = encodeURIComponent(
 
 **调用例子 :** `/ad/listening/rights/gain`
 
+### 云小编 - 获取用户详情
+
+说明: 登录后调用此接口, 获取云小编用户详情
+
+**接口地址:** `/rep/ugc/user/get`
+
+**调用例子:** `/rep/ugc/user/get`
+
+### 云小编 - 每日签到
+
+说明: 登录后调用此接口, 进行云小编签到, 领取 5 积分, 签到后 `/rep/ugc/user/get` 返回 `data.signed = 1`
+
+**接口地址:** `/rep/ugc/user/sign`
+
+**调用例子:** `/rep/ugc/user/sign`
+
+### 云小编 - 查询会员任务状态
+
+说明: 登录后调用此接口, 查询云小编会员任务状态, 当 `data.status = 20` 时, 可调用 `/rep/ugc/user/collect-vip` 领取会员
+
+**接口地址:** `/rep/ugc/user/vip`
+
+**调用例子:** `/rep/ugc/user/vip`
+
+### 云小编 - 活动信息
+
+说明: 登录后调用此接口, 查询云小编会员活动信息
+
+**接口地址:** `/rep/ugc/activity/get`
+
+**调用例子:** `/rep/ugc/activity/get`
+
+### 云小编 - 获取任务
+
+> 注意: 调用前请先使用官方客户端完成云小编“情绪标签审核”入站考试
+
+**可选参数:**
+
+`type`: 任务类型, 1: 歌曲曲风审核, 2: 歌曲语种审核, 3: 歌曲原唱审核, 4: 情绪标签审核, 默认 `4`
+
+**接口地址:** `/thinktank/audit/resource/detail`
+
+**调用例子:** `/thinktank/audit/resource/detail?type=4`
+
+### 云小编 - 提交任务
+
+> 注意: 投票结果会在后台审核, 一致 +3 积分, 不一致 -2 积分
+
+**可选参数:**
+
+`type`: 任务类型, 1: 歌曲曲风审核, 2: 歌曲语种审核, 3: 歌曲原唱审核, 4: 情绪标签审核, 默认 `4`
+
+**必选参数:**
+
+`taskId`: 任务 ID, 调用 `/thinktank/audit/resource/detail` 获取 `data.taskId`
+
+`judgement`: 审核结果, 1: 同意, 2: 否决, 3: 跳过 (不算次数)
+
+**接口地址:** `/thinktank/audit/resource/update`
+
+**调用例子:** `/thinktank/audit/resource/update?type=4&taskId=123456&judgement=1`
+
+### 云小编 - 领取任务积分
+
+说明: 完成任务后调用此接口, 领取云小编任务积分
+
+**可选参数:**
+
+`activityId`: 活动 ID, 调用 `/rep/ugc/activity/get` 获取, 默认 `5001`
+
+**接口地址:** `/rep/ugc/activity/collect`
+
+**调用例子:** `/rep/ugc/activity/collect?activityId=5001`
+
+### 云小编 - 领取一日会员
+
+说明: 达成领取条件 (`/rep/ugc/user/vip`) 后调用此接口, 领取一日会员
+
+**可选参数:**
+
+`activityId`: 活动 ID, 调用 `/rep/ugc/activity/get` 获取, 默认 `5001`
+
+**接口地址:** `/rep/ugc/user/collect-vip`
+
+**调用例子:** `/rep/ugc/user/collect-vip?activityId=5001`
+
 ## 离线访问此文档
 
 此文档同时也是 Progressive Web Apps(PWA), 加入了 serviceWorker, 可离线访问

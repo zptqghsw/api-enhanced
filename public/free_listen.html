@@ -172,7 +172,7 @@
       setTag('s1tag', 'busy', '注册中…')
       setNum('s1num', false)
       try {
-        const res = await fetch(nocache(base + '/register/checktoken?refresh=1'))
+        const res = await fetch(nocache(base + '/register/checktoken/v3?refresh=1'))
         const data = await res.json()
         $('s1pre').textContent = JSON.stringify(data, null, 2)
         if (data.token) {
