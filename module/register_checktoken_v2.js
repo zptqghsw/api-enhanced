@@ -34,5 +34,24 @@ module.exports = async (query) => {
   }
 }
 
+// 模块加载时自动获取一次 Token，确保 request.js 使用时不为空
+fetch()
+  .then((token) => {
+    _token = token
+  })
+  .catch(() => {
+    // 静默失败，后续请求时会重试
+  })
+
 // 给 request.js 读取用
-module.exports.getToken = () => _token
+module.exports.getToken = () => {
+  if (!_token) {
+    // 如果 Token 为空，异步触发获取
+    fetch()
+      .then((token) => {
+        _token = token
+      })
+      .catch(() => {})
+  }
+  return _token
+}

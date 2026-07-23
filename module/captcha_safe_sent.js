@@ -1,13 +1,12 @@
-// 检测手机号码是否已注册
+// 发送安全验证码
 
 const createOption = require('../util/option.js')
 module.exports = (query, request) => {
   const data = {
-    cellphone: query.phone,
-    countrycode: query.countrycode,
+    ctcode: query.ctcode || '86',
   }
   return request(
-    `/api/cellphone/existence/check`,
+    `/api/sms/captcha/safe/sent`,
     data,
     createOption(query, 'eapi'),
   )

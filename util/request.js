@@ -112,7 +112,7 @@ const userAgentMap = {
       'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
   },
   api: {
-    pc: 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Safari/537.36 Chrome/91.0.4472.164 NeteaseMusicDesktop/3.0.18.203152',
+    pc: 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Safari/537.36 Chrome/91.0.4472.164 NeteaseMusicDesktop/3.1.29.205117',
     android:
       'NeteaseMusic/9.1.65.240927161425(9001065);Dalvik/2.1.0 (Linux; U; Android 14; 23013RK75C Build/UKQ1.230804.001)',
     iphone: 'NeteaseMusic 9.0.90/5038 (iPhone; iOS 16.2; zh_CN)',
@@ -122,6 +122,7 @@ const userAgentMap = {
 // 预先定义常量
 const DOMAIN = APP_CONF.domain
 const API_DOMAIN = APP_CONF.apiDomain
+const EAPI_DOMAIN = APP_CONF.eapiDomain
 const XEAPI_DOMAIN = APP_CONF.xeapiDomain
 const ENCRYPT_RESPONSE = APP_CONF.encryptResponse
 const SPECIAL_STATUS_CODES = new Set([201, 302, 400, 502, 800, 801, 802, 803])
@@ -242,6 +243,9 @@ const createRequest = (uri, data, options) => {
         headers['Referer'] = options.domain || DOMAIN
         headers['User-Agent'] = options.ua || chooseUserAgent('weapi')
         data.csrf_token = csrfToken
+        if (options.checkToken) {
+          headers['X-antiCheatToken'] = token
+        }
         encryptData = encrypt.weapi(data)
         url = (options.domain || DOMAIN) + '/weapi/' + uri.substr(5)
         break
@@ -342,7 +346,7 @@ const createRequest = (uri, data, options) => {
           data.header = header
 
           encryptData = encrypt.eapi(uri, data)
-          url = (options.domain || API_DOMAIN) + '/eapi/' + uri.substr(5)
+          url = (options.domain || EAPI_DOMAIN) + '/eapi/' + uri.substr(5)
         } else if (crypto === 'api') {
           url = (options.domain || API_DOMAIN) + uri
           encryptData = data

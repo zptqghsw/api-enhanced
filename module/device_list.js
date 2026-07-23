@@ -1,13 +1,12 @@
-// 检测手机号码是否已注册
+// 登录设备列表
 
 const createOption = require('../util/option.js')
 module.exports = (query, request) => {
   const data = {
-    cellphone: query.phone,
-    countrycode: query.countrycode,
+    excStatus: '9',
   }
   return request(
-    `/api/cellphone/existence/check`,
+    `/api/middle/user/device/list`,
     data,
     createOption(query, 'eapi'),
   )

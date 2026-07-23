@@ -1,13 +1,13 @@
-// 检测手机号码是否已注册
+// 强制下线设备
 
 const createOption = require('../util/option.js')
 module.exports = (query, request) => {
   const data = {
-    cellphone: query.phone,
-    countrycode: query.countrycode,
+    key: query.deviceKey,
+    captcha: query.captcha || '',
   }
   return request(
-    `/api/cellphone/existence/check`,
+    `/api/middle/user/security/device/kickoff`,
     data,
     createOption(query, 'eapi'),
   )

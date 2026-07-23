@@ -283,7 +283,9 @@ AI 生成的图,仅供娱乐()
 
 `md5_password`: md5 加密后的密码,传入后 `password` 参数将失效
 
-`captcha`: 验证码,使用 [`/captcha/sent`](#发送验证码)接口传入手机号获取验证码,调用此接口传入验证码,可使用验证码登录,传入后 `password` 参数将失效
+`captcha`: 验证码,使用 `/captcha/sent` 或 `/captcha/sent/v1`接口传入手机号获取验证码,调用此接口传入验证码,可使用验证码登录,传入后 `password` 参数将失效
+
+`sca`: 网易易盾滑块验证token, 获取方式未知
 
 **接口地址 :** `/login/cellphone`
 
@@ -396,6 +398,19 @@ body {
 **接口地址 :** `/captcha/sent`
 
 **调用例子 :** `/captcha/sent?phone=13xxx`
+
+### 新版发送验证码
+
+说明 : 调用此接口 ,传入手机号码, 可发送验证码
+
+**必选参数 :** `phone`: 手机号码
+
+**可选参数 :**
+`ctcode`: 国家区号,默认 86 即中国
+
+**接口地址 :** `/captcha/sent/v1`
+
+**调用例子 :** `/captcha/sent/v1?phone=13xxx`
 
 ### 验证验证码
 
@@ -5495,6 +5510,14 @@ let data = encodeURIComponent(
 
 **调用例子 :** `/ad/listening/rights/gain`
 
+### 获取免费听时长状态
+
+说明 : 登录后调用此接口, 获取免费听剩余时长
+
+**接口地址 :** `/ad/listening/rights`
+
+**调用例子 :** `/ad/listening/rights`
+
 ### 云小编 - 获取用户详情
 
 说明: 登录后调用此接口, 获取云小编用户详情
@@ -5580,6 +5603,129 @@ let data = encodeURIComponent(
 **接口地址:** `/rep/ugc/user/collect-vip`
 
 **调用例子:** `/rep/ugc/user/collect-vip?activityId=5001`
+
+### 发送/删除评论
+
+说明 : 调用此接口,可发送评论或者删除评论
+
+1. 发送评论
+
+   **必选参数**
+
+   `type`: 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型
+
+   ```
+   0: 歌曲
+
+   1: mv
+
+   2: 歌单
+
+   3: 专辑
+
+   4: 电台
+
+   5: 视频
+
+   6: 动态
+   ```
+
+   `id`: 对应资源 id
+
+   `content`: 要发送的内容
+
+   **调用例子** : `/comment/add?type=1&id=5436712&content=test` (往广岛之恋 mv 发送评论: test)
+
+2. 回复评论
+
+   **必选参数**
+
+   `type`: 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型
+
+   ```
+   0: 歌曲
+
+   1: mv
+
+   2: 歌单
+
+   3: 专辑
+
+   4: 电台
+
+   5: 视频
+
+   6: 动态
+   ```
+
+   `id`: 对应资源 id
+
+   `cid`: 评论 id
+
+   `content`: 要发送的内容
+
+   **调用例子** : `/comment/add?type=1&id=5436712&cid=1535550516319&content=test` (往广岛之恋 mv 回复test评论: test)
+
+3. 删除评论
+
+   **必选参数**
+
+   `type`: 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型
+
+   ```
+   0: 歌曲
+
+   1: mv
+
+   2: 歌单
+
+   3: 专辑
+
+   4: 电台节目
+
+   5: 视频
+
+   6: 动态
+
+   7: 电台
+
+   ```
+
+   `id`: 对应资源 id
+
+   `cid`: 评论 id
+
+   **调用例子** : `/comment?type=1&id=5436712&cid=1535550516319` (在广岛之恋 mv 删除评论)
+
+### 获取在线设备列表
+
+说明: 登录后调用此接口, 获取在线设备列表
+
+**接口地址:** `/device/list`
+
+**调用例子:** `/device/list`
+
+### 发送安全验证码
+
+说明: 登录后调用此接口, 传入手机号, 可发送安全验证码
+
+**必选参数 :** `phone`: 手机号
+
+**接口地址 :** `/captcha/safe/sent`
+
+**调用例子 :** `/captcha/safe/sent?phone=13XXXXXXXXX`
+
+### 强制下线设备
+
+说明: 登录后调用此接口, 传入设备 id, 可强制下线设备的登录会话
+
+**必选参数 :** `key`: 设备的 `deviceKey`, 可通过 `/device/list` 获取
+
+`captcha`: 安全验证码, 可通过 `/captcha/safe/sent` 获取
+
+**接口地址 :** `/device/kickoff`
+
+**调用例子 :** `/device/kickoff?key=00ALDFGEXXXXXXXXXXXXXXXXX&captcha=1234`
 
 ## 离线访问此文档
 
