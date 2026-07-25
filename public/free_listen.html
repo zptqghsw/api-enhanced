@@ -56,6 +56,15 @@
     footer.site-footer a:hover { border-bottom: 1px dotted var(--fg); }
     .info-grid { display: grid; grid-template-columns: 80px 1fr; gap: 4px 12px; font-size: 13px; margin-top: 8px; }
     .info-grid .lbl { color: var(--muted); }
+
+    /* ---- 剩余时长计时器 ---- */
+    .timer-wrap { text-align: center; padding: 12px 0 4px; }
+    .timer-row { display: flex; align-items: baseline; justify-content: center; gap: 2px; font-variant-numeric: tabular-nums; }
+    .timer-num { font-size: 36px; font-weight: 700; letter-spacing: 1px; line-height: 1.2; font-family: 'SF Mono', 'Courier New', monospace; min-width: 2ch; text-align: center; }
+    .timer-label { font-size: 13px; color: var(--muted); margin-right: 12px; }
+    .timer-label:last-child { margin-right: 0; }
+    .timer-sep { font-size: 28px; font-weight: 300; color: #bbb; margin: 0 2px; }
+    .timer-unit { display: flex; flex-direction: column; align-items: center; }
   </style>
 </head>
 <body>
@@ -138,6 +147,47 @@
       <div class="row">
         <button id="runAll" class="primary">▶ 一键获取免费听时长</button>
         <button id="clearAll" class="danger">✕ 清空</button>
+      </div>
+    </div>
+
+    <!-- 剩余时长计时器 -->
+    <div class="block" id="rightsBlock">
+      <div class="flex sb">
+        <h3 id="rightsTitleDisplay">🕐 免费听时长剩余</h3>
+        <span id="rightsTag" class="tag no">未查询</span>
+      </div>
+      <p class="desc" id="rightsSubDesc">查询你的免费听权益剩余时长</p>
+      <div class="timer-wrap">
+        <div class="timer-row" id="timerRow">
+          <div class="timer-unit">
+            <span class="timer-num" id="timerDays">--</span>
+            <span class="timer-label">天</span>
+          </div>
+          <span class="timer-sep">:</span>
+          <div class="timer-unit">
+            <span class="timer-num" id="timerHours">--</span>
+            <span class="timer-label">时</span>
+          </div>
+          <span class="timer-sep">:</span>
+          <div class="timer-unit">
+            <span class="timer-num" id="timerMinutes">--</span>
+            <span class="timer-label">分</span>
+          </div>
+          <span class="timer-sep">:</span>
+          <div class="timer-unit">
+            <span class="timer-num" id="timerSeconds">--</span>
+            <span class="timer-label">秒</span>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="justify-content:center">
+        <button id="queryRightsBtn" class="primary">⟳ 查询剩余时长</button>
+        <button id="claim30Btn">领取30分钟</button>
+      </div>
+      <div class="info-grid" id="rightsInfo" style="display:none">
+        <div class="lbl">状态</div><div id="rightsStatus">-</div>
+        <div class="lbl">结束时间</div><div id="rightsEndTimeDisplay">-</div>
+        <div class="lbl">今日已覆盖</div><div id="rightsCoverToday">-</div>
       </div>
     </div>
 
@@ -260,6 +310,8 @@
           $('s3info').style.display = 'grid'
           const body = data.data || {}
           $('s3result').textContent = JSON.stringify(body).substring(0, 200)
+          // 领取成功后自动刷新剩余时长
+          queryRights()
           return true
         }
         setTag('s3tag', 'no', '领取失败')
@@ -306,7 +358,139 @@
       $('step3').disabled = true
       setTag('allTag', 'no', '就绪')
       $('runAll').disabled = false
+
+      // 重置计时器
+      stopCountdown()
+      $('timerDays').textContent = '--'
+      $('timerHours').textContent = '--'
+      $('timerMinutes').textContent = '--'
+      $('timerSeconds').textContent = '--'
+      setTag('rightsTag', 'no', '未查询')
+      $('rightsInfo').style.display = 'none'
+      $('rightsTitleDisplay').textContent = '🕐 免费听时长剩余'
+      $('rightsSubDesc').textContent = '查询你的免费听权益剩余时长'
+      $('runAll').disabled = true
     }
+
+    // ===== 剩余时长计时器 =====
+    let countdownTimer = null
+    let remainingMs = 0
+
+    /** 毫秒 → { d, h, m, s } */
+    function parseMs(ms) {
+      if (ms <= 0) return { d: 0, h: 0, m: 0, s: 0 }
+      const totalSec = Math.floor(ms / 1000)
+      return {
+        d: Math.floor(totalSec / 86400),
+        h: Math.floor((totalSec % 86400) / 3600),
+        m: Math.floor((totalSec % 3600) / 60),
+        s: totalSec % 60
+      }
+    }
+
+    function renderTimer(ms) {
+      const t = parseMs(ms)
+      $('timerDays').textContent = String(t.d).padStart(2, '0')
+      $('timerHours').textContent = String(t.h).padStart(2, '0')
+      $('timerMinutes').textContent = String(t.m).padStart(2, '0')
+      $('timerSeconds').textContent = String(t.s).padStart(2, '0')
+    }
+
+    function stopCountdown() {
+      if (countdownTimer) {
+        clearInterval(countdownTimer)
+        countdownTimer = null
+      }
+    }
+
+    function startCountdown(ms) {
+      stopCountdown()
+      remainingMs = Math.max(0, ms)
+      renderTimer(remainingMs)
+      if (remainingMs <= 0) {
+        setTag('rightsTag', 'no', '已用完')
+        return
+      }
+      countdownTimer = setInterval(() => {
+        remainingMs = Math.max(0, remainingMs - 1000)
+        renderTimer(remainingMs)
+        if (remainingMs <= 0) {
+          stopCountdown()
+          setTag('rightsTag', 'no', '已过期')
+        }
+      }, 1000)
+    }
+
+    async function queryRights() {
+      const btn = $('queryRightsBtn')
+      btn.disabled = true
+      setTag('rightsTag', 'busy', '查询中…')
+      try {
+        const res = await fetch(nocache(base + '/ad/listening/rights'))
+        const data = await res.json()
+        if (data.code === 200 && data.data) {
+          const d = data.data
+          $('rightsTitleDisplay').textContent = '🕐 ' + (d.title || '免费听时长剩余')
+          $('rightsSubDesc').textContent = d.vipInfoContent || '查询你的免费听权益剩余时长'
+          $('rightsInfo').style.display = 'grid'
+
+          // 状态
+          const status = d.status || ''
+          $('rightsStatus').textContent = status
+
+          // 结束时间
+          if (d.rightsEndTime) {
+            const endDate = new Date(d.rightsEndTime)
+            $('rightsEndTimeDisplay').textContent = endDate.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
+          }
+
+          // 今日已覆盖
+          $('rightsCoverToday').textContent = d.rightsCoverToday ? '是 ✓' : '否'
+
+          // 倒计时
+          if (d.rightsRemainingTime > 0) {
+            startCountdown(d.rightsRemainingTime)
+            setTag('rightsTag', 'ok', '已解锁 ✓')
+          } else {
+            renderTimer(0)
+            setTag('rightsTag', 'no', '已用完')
+          }
+
+          // 领取按钮（仅当 step3 可用时启用）
+          if (d.cardContent && d.cardContent.actionTitle && $('step3').disabled === false) {
+            $('claim30Btn').disabled = false
+            $('claim30Btn').textContent = d.cardContent.actionTitle
+          } else {
+            $('claim30Btn').disabled = true
+          }
+
+          if (d.rightsUpperLimit) {
+            $('rightsStatus').textContent += ' (已达上限)'
+          }
+
+          return data.data
+        }
+        setTag('rightsTag', 'no', '查询失败')
+        return null
+      } catch (e) {
+        setTag('rightsTag', 'no', e.message)
+        return null
+      } finally {
+        btn.disabled = false
+      }
+    }
+
+    $('queryRightsBtn').onclick = queryRights
+
+    $('claim30Btn').onclick = async function () {
+      const ok = await step3()
+      if (ok) await queryRights()
+    }
+
+    // 页面加载后自动查询一次
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(queryRights, 300)
+    })
   </script>
 </body>
 </html>
