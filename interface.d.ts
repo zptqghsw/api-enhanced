@@ -37,6 +37,41 @@ export const enum SubAction {
   unsub = 0,
 }
 
+export function ad_get(
+  params: { type_ids?: string } & RequestBaseConfig,
+): Promise<Response>
+
+export function ad_listening_rights(
+  params: RequestBaseConfig,
+): Promise<Response>
+
+export function ad_listening_rights_gain(
+  params: {
+    reqUid?: string
+    uid?: string | number
+    exposureTime?: string | number
+    clickTime?: string | number
+    extraRightsType?: string | number
+    playContinuously?: boolean | string
+    source?: string | number
+    creativeType?: string | number
+    rightsGainMethod?: string | number
+    extraRightsGainMethod?: string | number
+    extraRightsGainDuration?: string | number
+    nextRightsGainDuration?: string | number
+    rightsGainType?: string | number
+    rightsGainDuration?: string | number
+    gainMethodStep?: string | number
+    generalRightsInfo?: string
+    rightsExtJson?: string
+    appInfo?: string
+    contextInfo?: string
+    installed?: string | number
+    sniffTime?: string | number
+    type_ids?: string
+  } & RequestBaseConfig,
+): Promise<Response>
+
 export function activate_init_profile(
   params: { nickname: string } & RequestBaseConfig,
 ): Promise<Response>
@@ -117,6 +152,14 @@ export function album_sub(
 
 export function album_sublist(
   params: MultiPageConfig & RequestBaseConfig,
+): Promise<Response>
+
+export function api(
+  params: {
+    uri: string
+    data?: string | Record<string, unknown>
+    crypto?: string
+  } & RequestBaseConfig,
 ): Promise<Response>
 
 export function artist_album(
@@ -271,8 +314,19 @@ export function batch(
   params: { [index: string]: unknown } & RequestBaseConfig,
 ): Promise<Response>
 
+export function captcha_safe_sent(
+  params: { ctcode?: number | string } & RequestBaseConfig,
+): Promise<Response>
+
 export function captcha_sent(
   params: { phone: string; ctcode?: number | string } & RequestBaseConfig,
+): Promise<Response>
+
+export function captcha_sent_v1(
+  params: {
+    phone: number | string
+    ctcode?: number | string
+  } & RequestBaseConfig,
 ): Promise<Response>
 
 export function captcha_verify(
@@ -387,12 +441,28 @@ export function comment(
   } & RequestBaseConfig,
 ): Promise<Response>
 
+export function comment_add(
+  params: {
+    id: string | number
+    type: CommentType
+    content: string
+  } & RequestBaseConfig,
+): Promise<Response>
+
 export function comment_album(
   params: {
     id: string | number
     before?: string | number
   } & MultiPageConfig &
     RequestBaseConfig,
+): Promise<Response>
+
+export function comment_delete(
+  params: {
+    id: string | number
+    type: CommentType
+    cid: string | number
+  } & RequestBaseConfig,
 ): Promise<Response>
 
 export function comment_dj(
@@ -469,6 +539,15 @@ export function comment_playlist(
     RequestBaseConfig,
 ): Promise<Response>
 
+export function comment_reply(
+  params: {
+    id: string | number
+    type: CommentType
+    cid: string | number
+    content: string
+  } & RequestBaseConfig,
+): Promise<Response>
+
 export function comment_video(
   params: {
     id: string | number
@@ -489,6 +568,21 @@ export const enum DailySigninType {
 export function daily_signin(
   params: { type?: DailySigninType } & RequestBaseConfig,
 ): Promise<Response>
+
+export function decrypt(
+  params: {
+    crypto?: string
+    data?: string
+    hexString?: string
+    isReq?: boolean | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function device_kickoff(
+  params: { deviceKey: string | number; captcha?: string } & RequestBaseConfig,
+): Promise<Response>
+
+export function device_list(params: RequestBaseConfig): Promise<Response>
 
 export function digitalAlbum_ordering(
   params: {
@@ -618,12 +712,30 @@ export function dj_toplist_popular(
   params: { limit?: string | number } & RequestBaseConfig,
 ): Promise<Response>
 
+export function eapi_decrypt(
+  params: { hexString: string; isReq?: boolean | string } & RequestBaseConfig,
+): Promise<Response>
+
 export function event(
   params: { pagesize?: number; lasttime?: number } & RequestBaseConfig,
 ): Promise<Response>
 
 export function event_del(
   params: { evId: string | number } & RequestBaseConfig,
+): Promise<Response>
+
+export const enum EventPrivacy {
+  everyone = 0,
+  following = 1,
+  onlyMe = 2,
+  mutualFollowing = 6,
+}
+
+export function event_privacy(
+  params: {
+    evId: string | number
+    privacy: EventPrivacy
+  } & RequestBaseConfig,
 ): Promise<Response>
 
 export function event_forward(
@@ -665,6 +777,8 @@ export function hot_topic(
   params: MultiPageConfig & RequestBaseConfig,
 ): Promise<Response>
 
+export function inner_version(params: RequestBaseConfig): Promise<Response>
+
 export function like(
   params: {
     like?: 'true' | 'false' | boolean
@@ -676,6 +790,10 @@ export function like(
 
 export function likelist(
   params: { uid: string | number } & RequestBaseConfig,
+): Promise<Response>
+
+export function listentogether_status(
+  params: RequestBaseConfig,
 ): Promise<Response>
 
 export function login(
@@ -722,6 +840,17 @@ export function lyric(
 
 export function lyric_new(
   params: { id: string | number } & RequestBaseConfig,
+): Promise<Response>
+
+export function middle_play_do_lottery(
+  params: {
+    activityId?: string | number
+    drawCount?: string | number
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function middle_play_lottery_remain_chance(
+  params: { activityId?: string | number } & RequestBaseConfig,
 ): Promise<Response>
 
 export function msg_comments(
@@ -946,6 +1075,18 @@ export function register_cellphone(
   } & RequestBaseConfig,
 ): Promise<Response>
 
+export function register_checktoken_v2(
+  params: { refresh?: boolean | string } & RequestBaseConfig,
+): Promise<Response>
+
+export function register_checktoken_v3(
+  params: { refresh?: boolean | string } & RequestBaseConfig,
+): Promise<Response>
+
+export function register_xeapikey(
+  params: { deviceId?: string; currentKeyVersion?: string } & RequestBaseConfig,
+): Promise<Response>
+
 export function related_allvideo(
   params: { id: string | number } & RequestBaseConfig,
 ): Promise<Response>
@@ -953,6 +1094,67 @@ export function related_allvideo(
 export function related_playlist(
   params: { id: string | number } & RequestBaseConfig,
 ): Promise<Response>
+
+export function relay_play_state_submit(
+  params: {
+    id: string | number
+    sessionId?: string
+    progress?: string | number
+    playMode?: string
+    type?: string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function rep_ugc_activity_collect(
+  params: { activityId?: string | number } & RequestBaseConfig,
+): Promise<Response>
+
+export function rep_ugc_activity_get(
+  params: RequestBaseConfig,
+): Promise<Response>
+
+export function rep_ugc_exam_info_get(
+  params: { examType: string | number } & RequestBaseConfig,
+): Promise<Response>
+
+export function rep_ugc_exam_question_single_get(
+  params: {
+    examType: string | number
+    taskId: string | number
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function rep_ugc_exam_result_get(
+  params: {
+    examType: string | number
+    taskId: string | number
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function rep_ugc_exam_start(
+  params: { examType: string | number } & RequestBaseConfig,
+): Promise<Response>
+
+export function rep_ugc_exam_submit(
+  params: {
+    examType: string | number
+    taskId: string | number
+    questionId: string | number
+    answer: string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+declare const rep_ugc_user_collect_vip: (
+  params: { activityId?: string | number } & RequestBaseConfig,
+) => Promise<Response>
+
+export { rep_ugc_user_collect_vip as 'rep_ugc_user_collect-vip' }
+
+export function rep_ugc_user_get(params: RequestBaseConfig): Promise<Response>
+
+export function rep_ugc_user_sign(params: RequestBaseConfig): Promise<Response>
+
+export function rep_ugc_user_vip(params: RequestBaseConfig): Promise<Response>
 
 export const enum ResourceType {
   mv = 1,
@@ -976,6 +1178,22 @@ export function scrobble(
     id: string | number
     sourceid: string | number
     time: string | number
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function scrobble_v1(
+  params: {
+    id: string | number
+    time: string | number
+    total?: string | number
+    sourceid?: string | number
+    sourceId?: string | number
+    source?: string
+    name?: string
+    artist?: string
+    bitrate?: string | number
+    level?: string
+    vip?: boolean | string
   } & RequestBaseConfig,
 ): Promise<Response>
 
@@ -1267,6 +1485,25 @@ export function user_event(
   } & RequestBaseConfig,
 ): Promise<Response>
 
+export interface UserEventAllResponse {
+  code: number
+  events: Record<string, unknown>[]
+  /** Upstream account statistic; it can include events no longer returned. */
+  size: number | null
+  /** Number of unique events in `events`. */
+  retrievedCount: number
+  /** Positive difference between `size` and `retrievedCount`. */
+  unavailableCount: number | null
+  sizeMismatch: boolean | null
+  pageCount: number
+  more: false
+  lasttime: string | number | null
+}
+
+export function user_event_all(
+  params: RequestBaseConfig,
+): Promise<Response<UserEventAllResponse>>
+
 export function user_followeds(
   params: {
     uid: string | number
@@ -1430,6 +1667,23 @@ export function yunbei_task_finish(
   params: {
     userTaskId: number | string
     depositCode?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function yunbei_ad_task_list(
+  params: RequestBaseConfig,
+): Promise<Response>
+
+export function yunbei_ad_task_recommend_song(
+  params: {
+    offset?: number | string
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function yunbei_ad_task_finish(
+  params: {
+    yunbeiAmount?: number | string
   } & RequestBaseConfig,
 ): Promise<Response>
 
@@ -2292,6 +2546,10 @@ export function song_chorus(
   } & RequestBaseConfig,
 ): Promise<Response>
 
+export function song_cloud_download(
+  params: { id: string | number } & RequestBaseConfig,
+): Promise<Response>
+
 export function song_creators(
   params: {
     id: string | number
@@ -2401,6 +2659,18 @@ export function summary_annual(
 
 export function threshold_detail_get(
   params: RequestBaseConfig,
+): Promise<Response>
+
+export function thinktank_audit_resource_detail(
+  params: { type?: string | number } & RequestBaseConfig,
+): Promise<Response>
+
+export function thinktank_audit_resource_update(
+  params: {
+    type?: string | number
+    taskId: string | number
+    judgement: string | number
+  } & RequestBaseConfig,
 ): Promise<Response>
 
 export function toplist_detail_v2(params: RequestBaseConfig): Promise<Response>
@@ -2529,6 +2799,14 @@ export function verify_qrcodestatus(
 
 export function vip_sign(params: RequestBaseConfig): Promise<Response>
 
+export function vip_sign_detail(
+  params: { timestamp: string | number } & RequestBaseConfig,
+): Promise<Response>
+
+export function vip_sign_history(
+  params: { type?: string | number } & RequestBaseConfig,
+): Promise<Response>
+
 export function vip_sign_info(params: RequestBaseConfig): Promise<Response>
 
 export function vip_tasks_v1(
@@ -2549,6 +2827,22 @@ export function voice_upload(
       name: string
       data: string | Buffer
     }
+    imgFile?: {
+      name: string
+      data: string | Buffer
+    }
+    voiceListId: string | number
+    coverImgId?: string | number
+    categoryId: string | number
+    secondCategoryId: string | number
+    description: string
+    songName?: string
+    privacy?: string | number
+    publishTime?: string | number
+    autoPublish?: string | number
+    autoPublishText?: string
+    orderNo?: string | number
+    composedSongs?: string
   } & RequestBaseConfig,
 ): Promise<Response>
 
