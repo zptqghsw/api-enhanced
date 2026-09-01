@@ -344,7 +344,7 @@ async function constructServer(moduleDefs) {
               matchID,
             } = require('@neteasecloudmusicapienhanced/unblockmusic-utils')
             logger.info('Starting unblock(uses general unblock):', req.query.id)
-            const result = await matchID(req.query.id)
+            const result = await matchID(req.query.id, "gdmusic")
             song.url = result.data.url
             song.freeTrialInfo = null
             logger.info('Unblock success! url:', song.url)
