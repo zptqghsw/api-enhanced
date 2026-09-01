@@ -57,7 +57,7 @@ jobs:
           OPENCODE_API_KEY: ${{ steps.cfg.outputs.opencode_api_key }}
           GITHUB_TOKEN: ${{ steps.token.outputs.token }}
         with:
-          model: opencode/x-preview-f-free
+          model: opencode/muse-spark-1.2-contributor-free
           use_github_token: true
           prompt: |
             ${{ steps.cfg.outputs.opencode_prompt }}
