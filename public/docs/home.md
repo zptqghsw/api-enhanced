@@ -5856,6 +5856,18 @@ let data = encodeURIComponent(
 
 **调用例子 :** `/device/kickoff?key=00ALDFGEXXXXXXXXXXXXXXXXX&captcha=1234`
 
+### 上报设备中心设备名称
+
+说明: 登录后调用此接口, 传入 `deviceName`, 可修改当前设备在网易云登录设备管理列表里显示的名称
+
+**必选参数 :** `deviceName`: 期望展示的设备名称
+
+`name`: `deviceName` 的兼容别名, 二选一即可
+
+**接口地址 :** `/deviceinfo/center/upload`
+
+**调用例子 :** `/deviceinfo/center/upload?deviceName=XXXXX`
+
 ### 插播相似歌曲
 
 说明: 调用此接口, 传入歌曲 id, 可获取插播相似歌曲

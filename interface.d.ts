@@ -584,6 +584,10 @@ export function device_kickoff(
 
 export function device_list(params: RequestBaseConfig): Promise<Response>
 
+export function deviceinfo_center_upload(
+  params: { deviceName: string; name?: string } & RequestBaseConfig,
+): Promise<Response>
+
 export function digitalAlbum_ordering(
   params: {
     payment: string
